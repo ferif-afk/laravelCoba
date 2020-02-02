@@ -61,6 +61,22 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}   
         </style>
     </head>
     <body>
@@ -81,19 +97,48 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
-                </div>
+                    DATABASE OBAT
+              <!--   </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
+                    <a href="https://laravel.com/docs">ID</a>
+                    <a href="https://laracasts.com">Nama Obat</a>
+                    <a href="https://laravel-news.com">Jenis Obat</a>
+                    <a href="https://blog.laravel.com">Harga</a>
+                    <a href="https://nova.laravel.com">Pembeli</a>
+                    <!-- <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a> -->
+
                 </div>
+                <table style="width:100%">
+  <tr  style="color: #000;">
+    <th>ID</th>
+    <th style="background-color: #FFEBCD;">Nama Obat</th>
+    <th style="background-color: #FFEBCD;">Jenis</th>
+    <th style="background-color: #FFEBCD;">Harga</th>
+    <th style="background-color: #FFEBCD;">Pembeli</th>
+  </tr>
+  @foreach($data_obat ?? '' as $p)
+                            <tr>
+                                <td>{{ $p->id }}</td>
+                                <td>{{ $p->nama_obat}}</td>
+                                <td>{{ $p->jenis_obat }}</td>
+                                <td>{{ $p->harga }}</td>
+                                <td>{{ $p->pembeli }}</td>
+                            </tr>
+                            @endforeach
+ <!--  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+</table> -->
             </div>
         </div>
     </body>
