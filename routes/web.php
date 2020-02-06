@@ -11,5 +11,18 @@
 |
 */
 
-Route::get('/', "DashboardController@view");
+// Route::get('/', function () {
 
+// 		return view ('index');
+// });
+
+// Route::get('/about', function () {
+// 	$nama = 'Feri Ferdiansyah'; 
+
+// 		return view ('about', ['nama' => $nama]);
+// });
+
+Route::get('/', 'PageController@home' );
+Route::get('/about', 'PageController@about' );
+
+Route::get('/obat', 'ObatController@index');
