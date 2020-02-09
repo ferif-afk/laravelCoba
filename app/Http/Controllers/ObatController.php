@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Obat;
 use Illuminate\Http\Request;
 
 class ObatController extends Controller
@@ -13,7 +15,8 @@ class ObatController extends Controller
      */
     public function index()
     {
-        //
+        $obat = Obat::all();
+        return view ('obat.index', ['data' => $obat]);
     }
 
     /**
@@ -23,7 +26,7 @@ class ObatController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -34,7 +37,23 @@ class ObatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $obat = new Obat;
+        $obat->nama_obat = $request->nama;
+        $obat->jenis_obat = $request->jenis;
+        $obat->harga = $request->harga;
+        $obat->pembeli = $request->pembeli;
+
+        $file       = $request->file('photo');
+
+        $namefile   = $file->getClientOriginalName();
+
+        $request->file('photo')->move("images/", $namefile);
+
+        $obat->gambar = $namefile;
+
+        $obat->save();
+
+        return redirect('/');
     }
 
     /**
@@ -45,7 +64,7 @@ class ObatController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('/');
     }
 
     /**
@@ -54,9 +73,9 @@ class ObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Obat $obat)
     {
-        //
+        return view('edit',compact('obat'));
     }
 
     /**
@@ -66,9 +85,28 @@ class ObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Obat $obat)
     {
-        //
+        $obat = Obat::where('id', $obat->id)->first();
+
+        $obat->nama_obat = $request['nama'];
+        $obat->jenis_obat = $request['jenis'];
+        $obat->harga = $request['harga'];
+        $obat->pembeli = $request['pembeli'];
+
+        if($request->file('photo') == "")
+        {
+           $obat->gambar = $obat->gambar; } 
+        else
+        {
+            $file       = $request->file('photo');
+            $namefile   = $file->getClientOriginalName();
+            $request->file('photo')->move("images/", $namefile);
+            $obat->gambar = $namefile; }
+        
+        $obat->update();
+
+        return redirect('/');
     }
 
     /**
@@ -77,8 +115,9 @@ class ObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Obat $obat)
     {
-        //
+        Obat::destroy($obat->id);
+        return redirect('/');
     }
 }

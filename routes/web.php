@@ -22,7 +22,15 @@
 // 		return view ('about', ['nama' => $nama]);
 // });
 
-Route::get('/', 'PageController@home' );
-Route::get('/about', 'PageController@about' );
 
-Route::get('/obat', 'ObatController@index');
+// Route::get('/', 'PageController@home');
+// Route::get('/about', 'PageController@about');
+
+Route::get('/', 'ObatController@index');
+Route::get('/create', 'ObatController@create');
+Route::get('/{obat}', 'ObatController@show');
+Route::post('/', 'ObatController@store');
+Route::delete('/{obat}', 'ObatController@destroy');
+Route::get('/edit/{obat}', 'ObatController@edit');
+Route::patch('/{obat}', 'ObatController@update');
+
