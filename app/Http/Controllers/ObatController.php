@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use Illuminate\Support\Facedes\DB;
 use App\Obat;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class ObatController extends Controller
     public function index()
     {
         $obat = Obat::all();
-        return view ('obat.index', ['data' => $obat]);
+        return view ('/obat/index', ['data' => $obat]);
     }
 
     /**
@@ -108,6 +109,16 @@ class ObatController extends Controller
 
         return redirect('/');
     }
+
+    public function search(Request $request){
+      $obat = obat::when($request->search, function ($query) use ($request) {
+                $query->where('nama_obat', 'LIKE', "%{$request->search}%")
+                      ->orWhere('jenis_obat', 'LIKE', "%{$request->search}%")
+                      ->orWhere('harga', 'LIKE', "%{$request->search}%")
+                      ->orWhere('pembeli', 'LIKE', "%{$request->search}%");
+                })->get();
+      return view ('/obat/index', ['data' => $obat]);
+   }
 
     /**
      * Remove the specified resource from storage.
