@@ -48,7 +48,7 @@
       			<td><img src="{{ asset('images/'.$obat->gambar) }}" id="showgambar" style="max-width:200px;max-height:200px;" /></td>
     
       			<td>
-      				<a href="/edit/{{ $obat->id }}" class="badge badge-succes">edit</a>
+      				<a href="/edit/{{ $obat->id }}" class="btn btn-warning">edit</a>
       				<form action="{{ $obat->id }}" method="post">
       					@method('delete')
       					@csrf
@@ -59,7 +59,9 @@
       		@endforeach
       	</tbody>
       </table> 	
-      
+       
+        {{ $data->links() }}
+
     </div>
   </div>
 </div>
