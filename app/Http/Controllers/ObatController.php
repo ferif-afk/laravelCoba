@@ -118,7 +118,7 @@ class ObatController extends Controller
                       ->orWhere('jenis_obat', 'LIKE', "%{$request->search}%")
                       ->orWhere('harga', 'LIKE', "%{$request->search}%")
                       ->orWhere('pembeli', 'LIKE', "%{$request->search}%");
-                })->get();
+                })->paginate(3);
       return view ('/obat/index', ['data' => $obat]);
    }
 
