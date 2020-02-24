@@ -28,6 +28,10 @@
 
 Route::get('/', 'ObatController@index');
 
+Route::get('/dashboard/main', 'AdminObatController@index');
+
+
+
 Route::get('/obat/index', 'ObatController@search');
 
 Route::get('/create', 'ObatController@create');
