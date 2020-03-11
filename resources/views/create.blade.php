@@ -34,7 +34,7 @@
 
       <h1 class="mt-3">Hello, Daftar Obat!</h1>
 
-      <form method="post" action="/" enctype="multipart/form-data">
+      <form method="post" action="/store" enctype="multipart/form-data">
         @csrf
       <table class="table">
       	<thead class="thead-dark">

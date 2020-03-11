@@ -23,7 +23,7 @@ class ObatController extends Controller
         $obat = Obat::all();
         $obat = Obat::paginate(3);
 
-        return view('/obat/index', ['data' => $obat]);
+        return view('obat.index', ['data' => $obat]);
     }
 
     /**

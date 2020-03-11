@@ -27,8 +27,8 @@
 // Route::get('/about', 'PageController@about');
 
 // Route::get('/lojin','AuthController@index')->name('login');
-Route::get('/login','AuthController@login')->name('login');
-Route::post('/postlogin','AuthController@loginprocess');
+Route::get('/loginForm','AuthController@index');
+Route::post('/postlogin','AuthController@postLogin');
 Route::get('/logout','AuthController@logout');
 
 // Route::group(['middleware' => 'auth'], function(){
@@ -48,7 +48,7 @@ Route::get('/create', 'ObatController@create');
 
 Route::get('/{obat}', 'ObatController@show');
 
-Route::post('/', 'ObatController@store');
+Route::post('/store', 'ObatController@store');
 
 Route::delete('/{obat}', 'ObatController@destroy');
 

@@ -31,17 +31,14 @@
 	
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="col-md-12">
-				<center>
-				<img class="img-profile rounded-circle" src="{{ url('/login/images/bg-01.jpg') }}" style="width: 300px; height: 300px;"><br><br>
-				<div class="col-md-5" style="margin: 0 auto">
-				<form class="validate-form"  method="POST" action="/postlogin">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form"  method="POST" action="/postlogin">
 					{{csrf_field()}}
 					<span class="login100-form-title p-b-34">
 						Account Login
 					</span>
 					
-					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-10" data-validate="Type user name">
+					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
 						<input id="email" class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 					</div>
@@ -56,8 +53,6 @@
 						</button>
 					</div>
 				</form>
-				</div>
-				</center>
 					<div class="w-full text-center p-t-27 p-b-239">
 						<span class="txt1">
 							Forgot
@@ -68,6 +63,8 @@
 						</a>
 					</div>
 	
+
+				<div class="login100-more" style="background-image: url({{asset('login/images/bg-01.jpg')}}";></div>
 			</div>
 		</div>
 	</div>

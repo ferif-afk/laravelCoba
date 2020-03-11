@@ -11,20 +11,20 @@ class AuthController extends Controller
     	return view('auths.login'); 
     }
 
-    public function loginprocess(Request $request)
+    public function postLogin(Request $request)
     {
     	// $this->validate(Request)
     	if (Auth::attempt($request->only('email', 'password'))) {
-    			return redirect('/obat');
+    			return redirect('/');
     	}
-		return redirect('/login');    	
+		return redirect('auths.login');    	
 
     	// dd($request->all());
     }
 
     public function logout()
     {
-    	Auth::loguot();
-    	return redirect('/login');
+    	Auth::logout();
+    	return redirect('loginForm');
     }
 }
