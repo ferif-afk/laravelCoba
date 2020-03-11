@@ -7,6 +7,10 @@ use Illuminate\Support\Facedes\DB;
 use App\Obat;
 use Illuminate\Http\Request;
 
+use App\Exports\ObatExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+
 class ObatController extends Controller
 {
     /**
@@ -133,4 +137,10 @@ class ObatController extends Controller
         Obat::destroy($obat->id);
         return redirect('/');
     }
+
+        public function export_excel()
+    {
+        return Excel::download(new ObatExport, 'obat.xlsx');
+    }
+
 }

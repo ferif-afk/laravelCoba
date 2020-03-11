@@ -26,10 +26,20 @@
 // Route::get('/', 'PageController@home');
 // Route::get('/about', 'PageController@about');
 
+// Route::get('/lojin','AuthController@index')->name('login');
+Route::get('/login','AuthController@login')->name('login');
+Route::post('/postlogin','AuthController@loginprocess');
+Route::get('/logout','AuthController@logout');
+
+// Route::group(['middleware' => 'auth'], function(){
+// 	Route::get('/', 'ObatController@index');
+// });
 Route::get('/', 'ObatController@index');
 
-Route::get('/dashboard/main', 'AdminObatController@index');
+Route::get('/export_excel', 'ObatController@export_excel');
 
+
+Route::get('/dashboard/main', 'AdminObatController@index');
 
 
 Route::get('/obat/index', 'ObatController@search');

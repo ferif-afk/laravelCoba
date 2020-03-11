@@ -24,7 +24,8 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
 
-
+<a href="/export_excel" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
+    
 
       <table class="table">
       	<thead class="thead-dark">
