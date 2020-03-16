@@ -36,7 +36,7 @@
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
-                                <form method="get" action="{{url('/dashboard/main')}}">
+                                <form method="get" action="{{url('/dashboard/main2')}}">
                                 <input class="form-control" type="Search" name="search" id="search" placeholder="Search..">
                                 </form>
                             </div>
@@ -68,7 +68,7 @@
                             </li>
                             <li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Resep Obat</a>
+                                <a class="nav-link" href="/dashboard/main2" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Resep Obat</a>
                             </li>
                              <li>
                                 <li class="nav-item">
@@ -98,7 +98,7 @@
 
       <h1 class="mt-3">Hello, Daftar Obat!</h1>
 
-      <form method="post" action="/" enctype="multipart/form-data">
+      <form method="post" action="/store2" enctype="multipart/form-data">
         @csrf
       <table class="table">
         <thead>
@@ -113,6 +113,10 @@
           <tr>
               <th scope="col">Harga</th>
               <th><input type="text" name="harga" id="harga"></th>
+          </tr>
+          <tr>
+              <th scope="col">Stok</th>
+              <th><input type="text" name="stok" id="stok"></th>
           </tr>
           <tr>
             <th>preview gambar  </th>

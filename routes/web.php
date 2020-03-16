@@ -28,20 +28,47 @@
 
 Route::get('/', 'ObatController@index');
 
+<<<<<<< Updated upstream
 Route::get('/obat/index', 'ObatController@search');
+=======
+Route::get('/export_excel1', 'AdminObatController@export_excel');
 
-Route::get('/create', 'ObatController@create');
 
-Route::get('/{obat}', 'ObatController@show');
+Route::get('/dashboard/main', 'AdminObatController@index');
 
+Route::get('/create', 'AdminObatController@create');
+
+Route::get('/{obat}', 'AdminObatController@show');
+>>>>>>> Stashed changes
+
+Route::post('/store', 'AdminObatController@store');
+
+Route::delete('/{obat}', 'AdminObatController@destroy');
+
+<<<<<<< Updated upstream
 Route::post('/', 'ObatController@store');
+=======
+Route::get('/edit/{obat}', 'AdminObatController@edit');
+>>>>>>> Stashed changes
 
-Route::delete('/{obat}', 'ObatController@destroy');
+Route::patch('/{obat}', 'AdminObatController@update');
 
-Route::get('/edit/{obat}', 'ObatController@edit');
 
-Route::patch('/{obat}', 'ObatController@update');
+Route::get('/dashboard/main2', 'GudangController@index');
 
+Route::get('/create2', 'GudangController@create');
+
+Route::get('/gudang/{gudang}', 'GudangController@show');
+
+Route::post('/store2', 'GudangController@store');
+
+Route::delete('/gudang/{gudang}', 'GudangController@destroy');
+
+Route::get('/edit2/{gudang}', 'GudangController@edit');
+
+Route::patch('/gd/{gudang}', 'GudangController@update');
+
+Route::get('/export_excel2', 'GudangController@export_excel');
 
 
 

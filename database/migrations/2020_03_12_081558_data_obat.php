@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePasienTable extends Migration
+class DataObat extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreatePasienTable extends Migration
      */
     public function up()
     {
-        Schema::create('pasien', function (Blueprint $table) {
+        Schema::create('data_obat', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_pasein');
-            $table->string('ruang');
-            $table->string('jenis_kelamin');
-            $table->string('umur');
+            $table->string('nama_obat');
+            $table->string('jenis_obat');
+            $table->char('harga');
+            $table->string('gambar');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreatePasienTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pasien');
+        Schema::dropIfExists('data_obat');
     }
 }

@@ -2,30 +2,30 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Support\Facedes\DB;
 use App\Obat;
 use Illuminate\Http\Request;
 
-class ObatController extends Controller
+use App\Exports\ObatExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+
+class AdminObatController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-            
-        
-        $obat = Obat::all();
-        $obat = Obat::paginate(3);
+        $obat = obat::when($request->search, function ($query) use ($request) {
+                $query->where('nama_obat', 'LIKE', "%{$request->search}%")
+                      ->orWhere('jenis_obat', 'LIKE', "%{$request->search}%")
+                      ->orWhere('harga', 'LIKE', "%{$request->search}%");
+                })->paginate(3);
 
-<<<<<<< Updated upstream
-        return view('/obat/index', ['data' => $obat]);
-=======
-        return view('obat.index', ['obat' => $obat]);
->>>>>>> Stashed changes
+        return view('dashboard.main', ['obat' => $obat]);
     }
 
     /**
@@ -50,7 +50,7 @@ class ObatController extends Controller
         $obat->nama_obat = $request->nama;
         $obat->jenis_obat = $request->jenis;
         $obat->harga = $request->harga;
-        $obat->pembeli = $request->pembeli;
+
 
         $file       = $request->file('photo');
 
@@ -62,7 +62,7 @@ class ObatController extends Controller
 
         $obat->save();
 
-        return redirect('/');
+        return redirect('/dashboard/main');
     }
 
     /**
@@ -73,7 +73,7 @@ class ObatController extends Controller
      */
     public function show($id)
     {
-        return view('/');
+        return view('/dashboard/main');
     }
 
     /**
@@ -101,7 +101,6 @@ class ObatController extends Controller
         $obat->nama_obat = $request['nama'];
         $obat->jenis_obat = $request['jenis'];
         $obat->harga = $request['harga'];
-        $obat->pembeli = $request['pembeli'];
 
         if($request->file('photo') == "")
         {
@@ -115,18 +114,8 @@ class ObatController extends Controller
         
         $obat->update();
 
-        return redirect('/');
+        return redirect('/dashboard/main');
     }
-
-    public function search(Request $request){
-      $obat = obat::when($request->search, function ($query) use ($request) {
-                $query->where('nama_obat', 'LIKE', "%{$request->search}%")
-                      ->orWhere('jenis_obat', 'LIKE', "%{$request->search}%")
-                      ->orWhere('harga', 'LIKE', "%{$request->search}%")
-                      ->orWhere('pembeli', 'LIKE', "%{$request->search}%");
-                })->get();
-      return view ('/obat/index', ['data' => $obat]);
-   }
 
     /**
      * Remove the specified resource from storage.
@@ -137,11 +126,11 @@ class ObatController extends Controller
     public function destroy(Obat $obat)
     {
         Obat::destroy($obat->id);
-        return redirect('/');
+        return redirect('/dashboard/main');
     }
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> Stashed changes
+       public function export_excel()
+    {
+        return Excel::download(new ObatExport, 'obat.xlsx');
+    }
 }

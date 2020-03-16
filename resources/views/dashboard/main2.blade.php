@@ -38,6 +38,7 @@
                             <div id="custom-search" class="top-search-bar">
                                 <form method="get" action="{{url('/dashboard/main')}}">
                                 <input class="form-control" type="Search" name="search" id="search" placeholder="Search..">
+                               
                                 </form>
                             </div>
                         </li>
@@ -64,15 +65,15 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="/dashboard/main" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
+                                <a class="nav-link active" href="/dashboard/main" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Data Obat <span class="badge badge-success">6</span></a>
                             </li>
                             <li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Resep Obat</a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Gudang Obat</a>
                             </li>
                              <li>
                                 <li class="nav-item">
-                                <a href="/export_excel" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
+                                <a href="/export_excel2" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
                             </li>   
                             <li>
                                 <li class="nav-item">
@@ -94,48 +95,55 @@
             <div class="main-content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-10">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <div class="right">
+                                        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle">
+                                        </i></button>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
 
-      <h1 class="mt-3">Hello, Daftar Obat!</h1>
-
-      <form method="post" action="/" enctype="multipart/form-data">
-        @csrf
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Nama Obat</th>
-            <th><input type="text" name="nama" id="nama"></th>
-          </tr>
-          <tr>
-              <th scope="col">Jenis Obat</th>
-              <th><input type="text" name="jenis" id="jenis"></th>
-          </tr>
-          <tr>
-              <th scope="col">Harga</th>
-              <th><input type="text" name="harga" id="harga"></th>
-          </tr>
-          <tr>
-            <th>preview gambar  </th>
-            <th><img src="http://placehold.it/100x100" id="showgambar" style="max-width:200px;max-height:200px;float:left;" /> </th>
-          </tr>
-
-          <tr>
-              <th scope="col">Upload Gambar</th>
-              <th><input type="file" id="inputgambar" name="photo"></th>
-          </tr>   
-          <tr>
-            <th></th>
-            <th><button type="submit">Tambah Data</button></th>
-          </tr>           
-        </thead>
-
-        <tbody>
-
-        </tbody>
-      </table>  
-      </form>
-    </div>
-  </div>
+                            <a href="/create2">(+) Tambah Data Obat</a>
+                                    <table class="table table-hover">
+                                        <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0">Id</th>
+                                                        <th class="border-0">Nama Obat</th>
+                                                        <th class="border-0">Jenis Obat</th>
+                                                        <th class="border-0">Stok</th>
+                                                        <th class="border-0">Harga</th>
+                                                        <th class="border-0">Gambar</th>
+                                                        <th class="border-0">Aksi</th>
+                                                    </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($gudang as $gd)
+                                           <tr>
+                                                    <td>{{ $gd->id}}</td>
+                                                    <td>{{ $gd->nama_obat}}</td>
+                                                    <td>{{ $gd->jenis_obat}}</td>
+                                                    <td>{{ $gd->stok}}</td>
+                                                    <td>{{ $gd->harga}}</td>
+                                                    <td><img src="{{ asset('images/'.$gd->gambar) }}" id="showgambar" style="max-width:200px;max-height:200px;" /></td>
+                                        
+                                                    <td>
+                                                        <a href="/edit2/{{ $gd->id }}" class="btn btn-warning">edit</a>
+                                                        <form action="/gudang/{{ $gd->id }}" method="post">
+                                                            @method('delete')
+                                                            @csrf
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                        </tbody>
+                                    </table>
+                                    {{$gudang->links()}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -184,6 +192,3 @@
 </body>
  
 </html>
- 
-
-

@@ -10,7 +10,6 @@
 
       <h1 class="mt-3">Hello, Daftar Obat!</h1>
 
-      	<a href="/create">(+) Tambah Data Obat</a>
 
         <!-- Search form -->
 <!-- <form method="get" action="{{url('search')}}" class="form-inline md-form form-sm active-pink active-pink-2 mt-2">
@@ -19,12 +18,16 @@
     aria-label="search">
 </form> -->
 
-        <form method="get" action="{{url('/obat/index')}}" class="form-inline my-2 my-lg-0">
+        <form method="get" action="{{url('/')}}" class="form-inline my-2 my-lg-0">
         <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+<<<<<<< Updated upstream
 
 
+=======
+    
+>>>>>>> Stashed changes
 
       <table class="table">
       	<thead class="thead-dark">
