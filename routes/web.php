@@ -28,9 +28,7 @@
 
 Route::get('/', 'ObatController@index');
 
-<<<<<<< Updated upstream
 Route::get('/obat/index', 'ObatController@search');
-=======
 Route::get('/export_excel1', 'AdminObatController@export_excel');
 
 
@@ -39,17 +37,13 @@ Route::get('/dashboard/main', 'AdminObatController@index');
 Route::get('/create', 'AdminObatController@create');
 
 Route::get('/{obat}', 'AdminObatController@show');
->>>>>>> Stashed changes
 
 Route::post('/store', 'AdminObatController@store');
 
 Route::delete('/{obat}', 'AdminObatController@destroy');
 
-<<<<<<< Updated upstream
 Route::post('/', 'ObatController@store');
-=======
 Route::get('/edit/{obat}', 'AdminObatController@edit');
->>>>>>> Stashed changes
 
 Route::patch('/{obat}', 'AdminObatController@update');
 

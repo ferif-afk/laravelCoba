@@ -10,7 +10,9 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {	
+    	factory(\App\Obat::class,10)->create();
+    	factory(\App\Gudang::class, 10)->create();
         // $this->call(UsersTableSeeder::class);
     }
 }
