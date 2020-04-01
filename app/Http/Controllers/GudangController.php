@@ -3,30 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facedes\DB;
-use App\Obat;
+use App\Gudang;
 use Illuminate\Http\Request;
 
-use App\Exports\ObatExport;
+use App\Exports\GudangExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
-class AdminObatController extends Controller
+class GudangController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function index(Request $request)
+    public function index()
     {
-        $obat = obat::when($request->search, function ($query) use ($request) {
-                $query->where('nama_obat', 'LIKE', "%{$request->search}%")
-                      ->orWhere('jenis_obat', 'LIKE', "%{$request->search}%")
-                      ->orWhere('harga', 'LIKE', "%{$request->search}%");
-                })->paginate(3);
+         $gudang = Gudang::all();
+        $gudang = Gudang::paginate(3);
 
-        return view('dashboard.main', ['obat' => $obat]);
+        return view('dashboard.main2', ['gudang' => $gudang]);
     }
 
     /**
@@ -36,7 +32,7 @@ class AdminObatController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('create2');
     }
 
     /**
@@ -47,10 +43,11 @@ class AdminObatController extends Controller
      */
     public function store(Request $request)
     {
-        $obat = new Obat;
-        $obat->nama_obat = $request->nama;
-        $obat->jenis_obat = $request->jenis;
-        $obat->harga = $request->harga;
+        $gudang = new Gudang;
+        $gudang->nama_obat = $request->nama;
+        $gudang->jenis_obat = $request->jenis;
+        $gudang->harga = $request->harga;
+        $gudang->stok = $request->stok;
 
         $file       = $request->file('photo');
 
@@ -58,11 +55,11 @@ class AdminObatController extends Controller
 
         $request->file('photo')->move("images/", $namefile);
 
-        $obat->gambar = $namefile;
+        $gudang->gambar = $namefile;
 
-        $obat->save();
+        $gudang->save();
 
-        return redirect('/dashboard/main');
+        return redirect('/dashboard/main2');
     }
 
     /**
@@ -73,7 +70,7 @@ class AdminObatController extends Controller
      */
     public function show($id)
     {
-        return view('/dashboard/main');
+         return view('/dashboard/main2');
     }
 
     /**
@@ -82,9 +79,9 @@ class AdminObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Obat $obat)
+    public function edit(Gudang $gudang)
     {
-        return view('edit',compact('obat'));
+        return view('edit2',compact('gudang'));
     }
 
     /**
@@ -94,24 +91,29 @@ class AdminObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Obat $obat)
+    public function update(Request $request, Gudang $gudang)
     {
-        $obat = Obat::where('id', $obat->id)->first();
+         $gudang = Gudang::where('id', $gudang->id)->first();
 
-        $obat->nama_obat = $request['nama'];
-        $obat->jenis_obat = $request['jenis'];
-        $obat->harga = $request['harga'];
+        $gudang->nama_obat = $request['nama'];
+        $gudang->jenis_obat = $request['jenis'];
+        $gudang->harga = $request['harga'];
+        $gudang->stok = $request['stok'];
+
         if($request->file('photo') == "")
         {
-           $obat->gambar = $obat->gambar; } 
+           $gudang->gambar = $gudang->gambar; } 
         else
         {
             $file       = $request->file('photo');
             $namefile   = $file->getClientOriginalName();
             $request->file('photo')->move("images/", $namefile);
-            $obat->gambar = $namefile; }
+            $gudang->gambar = $namefile; }
         
-        $obat->update();
+        $gudang->update();
+
+        return redirect('/dashboard/main2');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -119,14 +121,13 @@ class AdminObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Obat $obat)
+    public function destroy(Gudang $gudang)
     {
-        Obat::destroy($obat->id);
-        return redirect('/dashboard/main');
+         Gudang::destroy($gudang->id);
+        return redirect('/dashboard/main2');
     }
-
-       public function export_excel()
+     public function export_excel()
     {
-        return Excel::download(new ObatExport, 'obat.xlsx');
+        return Excel::download(new GudangExport, 'gudang.xlsx');
     }
 }

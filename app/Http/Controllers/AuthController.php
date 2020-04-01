@@ -15,7 +15,7 @@ class AuthController extends Controller
     {
     	// $this->validate(Request)
     	if (Auth::attempt($request->only('email', 'password'))) {
-    			return redirect('/');
+    			return redirect('/dashboard/main');
     	}
 		return redirect('auths.login');    	
 

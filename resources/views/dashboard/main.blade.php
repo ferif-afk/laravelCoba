@@ -28,7 +28,7 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">Obat Herbal</a>
+                <a class="navbar-brand" href="/dashboard/main">Obat Herbal</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -36,7 +36,10 @@
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="Search" placeholder="Search..">
+                                <form method="get" action="{{url('/dashboard/main')}}">
+                                <input class="form-control" type="Search" name="search" id="search" placeholder="Search..">
+                               
+                                </form>
                             </div>
                         </li>
                     </ul>
@@ -62,13 +65,21 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
+                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Data Obat <span class="badge badge-success">6</span></a>
                             </li>
-                            </li>
+                            <li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Resep Obat</a>
+                                <a class="nav-link" href="/dashboard/main2" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Gudang Obat</a>
+                            </li>
+                             <li>
+                                <li class="nav-item">
+                                <a href="/export_excel1" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
                             </li>   
-                
+                            <li>
+                                <li class="nav-item">
+                                <a class="nav-link" href="/logout" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2">Log Out</a>
+                            </li>   
+                           
                         </ul>
                     </div>
                 </nav>
@@ -91,6 +102,8 @@
                                     </div>
                                 </div>
                                 <div class="panel-body">
+
+                            <a href="/create">(+) Tambah Data Obat</a>
                                     <table class="table table-hover">
                                         <thead class="bg-light">
                                                     <tr class="border-0">
@@ -98,24 +111,22 @@
                                                         <th class="border-0">Nama Obat</th>
                                                         <th class="border-0">Jenis Obat</th>
                                                         <th class="border-0">Harga</th>
-                                                        <th class="border-0">Pembeli</th>
                                                         <th class="border-0">Gambar</th>
                                                         <th class="border-0">Aksi</th>
                                                     </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($data as $obat)
+                                            @foreach($obat as $ob)
                                            <tr>
-                                                    <td>{{ $obat->id}}</td>
-                                                    <td>{{ $obat->nama_obat}}</td>
-                                                    <td>{{ $obat->jenis_obat}}</td>
-                                                    <td>{{ $obat->harga}}</td>
-                                                    <td>{{ $obat->pembeli}}</td>
-                                                    <td><img src="{{ asset('images/'.$obat->gambar) }}" id="showgambar" style="max-width:200px;max-height:200px;" /></td>
+                                                    <td>{{ $ob->id}}</td>
+                                                    <td>{{ $ob->nama_obat}}</td>
+                                                    <td>{{ $ob->jenis_obat}}</td>
+                                                    <td>{{ $ob->harga}}</td>
+                                                    <td><img src="{{ asset('images/'.$ob->gambar) }}" id="showgambar" style="max-width:200px;max-height:200px;" /></td>
                                         
                                                     <td>
-                                                        <a href="/edit/{{ $obat->id }}" class="btn btn-warning">edit</a>
-                                                        <form action="{{ $obat->id }}" method="post">
+                                                        <a href="/edit/{{ $ob->id }}" class="btn btn-warning">edit</a>
+                                                        <form action="/{{ $ob->id }}" method="post">
                                                             @method('delete')
                                                             @csrf
                                                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -125,7 +136,7 @@
                                                 @endforeach
                                         </tbody>
                                     </table>
-                                    {{$data->links()}}
+                                    {{$obat->links()}}
                                 </div>
                             </div>
                         </div>

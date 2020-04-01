@@ -20,10 +20,12 @@ class ObatController extends Controller
      */
     public function index()
     {
+            
+        
         $obat = Obat::all();
         $obat = Obat::paginate(3);
 
-        return view('obat.index', ['data' => $obat]);
+        return view('obat.index', ['obat' => $obat]);
     }
 
     /**
@@ -142,5 +144,4 @@ class ObatController extends Controller
     {
         return Excel::download(new ObatExport, 'obat.xlsx');
     }
-
 }

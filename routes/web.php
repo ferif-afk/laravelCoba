@@ -43,19 +43,26 @@ Route::get('/dashboard/main', 'AdminObatController@index');
 
 
 Route::get('/obat/index', 'ObatController@search');
+Route::get('/export_excel1', 'AdminObatController@export_excel');
 
-Route::get('/create', 'ObatController@create');
 
-Route::get('/{obat}', 'ObatController@show');
+Route::get('/dashboard/main', 'AdminObatController@index');
 
-Route::post('/store', 'ObatController@store');
+Route::get('/create', 'AdminObatController@create');
 
-Route::delete('/{obat}', 'ObatController@destroy');
+Route::get('/{obat}', 'AdminObatController@show');
 
-Route::get('/edit/{obat}', 'ObatController@edit');
+Route::post('/store', 'AdminObatController@store');
 
-Route::patch('/{obat}', 'ObatController@update');
+Route::delete('/{obat}', 'AdminObatController@destroy');
 
+Route::delete('/gudang/{gudang}', 'GudangController@destroy');
+
+Route::get('/edit2/{gudang}', 'GudangController@edit');
+
+Route::patch('/gd/{gudang}', 'GudangController@update');
+
+Route::get('/export_excel2', 'GudangController@export_excel');
 
 
 
