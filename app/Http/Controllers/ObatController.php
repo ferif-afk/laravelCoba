@@ -7,6 +7,10 @@ use Illuminate\Support\Facedes\DB;
 use App\Obat;
 use Illuminate\Http\Request;
 
+use App\Exports\ObatExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+
 class ObatController extends Controller
 {
     /**
@@ -21,11 +25,7 @@ class ObatController extends Controller
         $obat = Obat::all();
         $obat = Obat::paginate(3);
 
-<<<<<<< Updated upstream
-        return view('/obat/index', ['data' => $obat]);
-=======
         return view('obat.index', ['obat' => $obat]);
->>>>>>> Stashed changes
     }
 
     /**
@@ -124,7 +124,7 @@ class ObatController extends Controller
                       ->orWhere('jenis_obat', 'LIKE', "%{$request->search}%")
                       ->orWhere('harga', 'LIKE', "%{$request->search}%")
                       ->orWhere('pembeli', 'LIKE', "%{$request->search}%");
-                })->get();
+                })->paginate(3);
       return view ('/obat/index', ['data' => $obat]);
    }
 
@@ -139,9 +139,9 @@ class ObatController extends Controller
         Obat::destroy($obat->id);
         return redirect('/');
     }
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> Stashed changes
+        public function export_excel()
+    {
+        return Excel::download(new ObatExport, 'obat.xlsx');
+    }
 }

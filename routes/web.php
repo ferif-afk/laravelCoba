@@ -26,7 +26,21 @@
 // Route::get('/', 'PageController@home');
 // Route::get('/about', 'PageController@about');
 
+// Route::get('/lojin','AuthController@index')->name('login');
+Route::get('/loginForm','AuthController@index');
+Route::post('/postlogin','AuthController@postLogin');
+Route::get('/logout','AuthController@logout');
+
+// Route::group(['middleware' => 'auth'], function(){
+// 	Route::get('/', 'ObatController@index');
+// });
 Route::get('/', 'ObatController@index');
+
+Route::get('/export_excel', 'ObatController@export_excel');
+
+
+Route::get('/dashboard/main', 'AdminObatController@index');
+
 
 Route::get('/obat/index', 'ObatController@search');
 Route::get('/export_excel1', 'AdminObatController@export_excel');
@@ -41,20 +55,6 @@ Route::get('/{obat}', 'AdminObatController@show');
 Route::post('/store', 'AdminObatController@store');
 
 Route::delete('/{obat}', 'AdminObatController@destroy');
-
-Route::post('/', 'ObatController@store');
-Route::get('/edit/{obat}', 'AdminObatController@edit');
-
-Route::patch('/{obat}', 'AdminObatController@update');
-
-
-Route::get('/dashboard/main2', 'GudangController@index');
-
-Route::get('/create2', 'GudangController@create');
-
-Route::get('/gudang/{gudang}', 'GudangController@show');
-
-Route::post('/store2', 'GudangController@store');
 
 Route::delete('/gudang/{gudang}', 'GudangController@destroy');
 

@@ -80,8 +80,6 @@
                                 <a class="nav-link" href="/logout" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2">Log Out</a>
                             </li>   
                            
-
-
                         </ul>
                     </div>
                 </nav>

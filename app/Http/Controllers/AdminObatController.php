@@ -17,6 +17,7 @@ class AdminObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request)
     {
         $obat = obat::when($request->search, function ($query) use ($request) {
@@ -50,7 +51,6 @@ class AdminObatController extends Controller
         $obat->nama_obat = $request->nama;
         $obat->jenis_obat = $request->jenis;
         $obat->harga = $request->harga;
-
 
         $file       = $request->file('photo');
 
@@ -101,7 +101,6 @@ class AdminObatController extends Controller
         $obat->nama_obat = $request['nama'];
         $obat->jenis_obat = $request['jenis'];
         $obat->harga = $request['harga'];
-
         if($request->file('photo') == "")
         {
            $obat->gambar = $obat->gambar; } 
@@ -113,9 +112,6 @@ class AdminObatController extends Controller
             $obat->gambar = $namefile; }
         
         $obat->update();
-
-        return redirect('/dashboard/main');
-    }
 
     /**
      * Remove the specified resource from storage.

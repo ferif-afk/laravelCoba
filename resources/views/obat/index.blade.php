@@ -22,12 +22,8 @@
         <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-<<<<<<< Updated upstream
-
-
-=======
+<a href="/export_excel" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
     
->>>>>>> Stashed changes
 
       <table class="table">
       	<thead class="thead-dark">
